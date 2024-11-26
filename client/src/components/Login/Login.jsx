@@ -3,7 +3,7 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import apiBase from "../../utils/apiUrl.js";
 import { useMutation } from "react-query";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import userStoreDetails from "../../Store/userStoreDetails.js";
@@ -36,18 +36,14 @@ export default function Login() {
 
     onSuccess: (user) => {
       setUser(user);
-      toast.success("login successful", {
-        duration: 4000,
-      });
+      toast.success("login successful");
       setTimeout(() => {
         navigate("/blog-listing");
       }, 2000);
     },
 
     onError: (error) => {
-      toast.error(error.message, {
-        duration: 3000,
-      });
+      toast.error(error.message);
     },
   });
   function handleSubmit(e) {
@@ -58,15 +54,14 @@ export default function Login() {
   return (
     <div>
       <div className="signup-container">
-        <Toaster position="top-center" richColors expand={true} />
         <h2>Welcome back!</h2>
         <form className="signup-form">
-          <label className="signup-label">Username/Email</label>
+          <label className="signup-label">Email</label>
           <input
             type="text"
-            name="usernameOrEmail"
+            name="Email"
             className="signup-input"
-            placeholder="Enter a username or email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

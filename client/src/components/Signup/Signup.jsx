@@ -3,24 +3,22 @@ import "./Signup.css";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
-import apiBase from "../../utils/apiUrl.js";
-
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import apiUrl from "../../utils/apiUrl";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [formError, setFormError] = useState("");
 
   const navigate = useNavigate();
 
   const { mutate, isLoading, isError, error } = useMutation({
     mutationFn: async (userDetails) => {
-      const response = await fetch(`${apiBase}/register`, {
+      const response = await fetch(`${apiUrl}/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,33 +33,27 @@ function Signup() {
     },
 
     onSuccess: () => {
-      toast.success("User Registered Successfully", {
-        duration: 4000,
-      });
+      toast.success("User Registered Successfully");
       setTimeout(() => {
         navigate("/login");
       }, 2000);
     },
 
     onError: (error) => {
-      toast.error(error.message, {
-        duration: 3000,
-      });
+      toast.error(error.message);
     },
   });
   function handleSubmit(e) {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match", {
-        duration: 3000,
-      });
+      toast.error("Passwords do not match");
       return;
     }
     const newUser = {
       firstName,
       lastName,
       email,
-      username,
+
       password,
     };
 
@@ -71,7 +63,6 @@ function Signup() {
   return (
     <div className="signup-container">
       <h2>Signup</h2>
-      <Toaster richColors position="top-center" />
       <form className="signup-form">
         <label className="signup-label">First Name:</label>
         <input
@@ -101,16 +92,6 @@ function Signup() {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <label className="signup-label">Username:</label>
-        <input
-          type="text"
-          name="username"
-          className="signup-input"
-          placeholder="Choose a username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
         />
 
         <label className="signup-label">Password:</label>

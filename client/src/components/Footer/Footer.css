@@ -1,0 +1,8 @@
+.footer-section {
+  text-transform: capitalize;
+  text-align: center;
+  color: white;
+  background-color: black;
+  border: 2rem;
+  padding: 2rem;
+}

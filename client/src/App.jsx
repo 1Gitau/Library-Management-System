@@ -5,6 +5,7 @@ import {
   Routes,
   BrowserRouter,
 } from "react-router-dom";
+import Head from "./components/head/head";
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/Footer";
 import Hero from "./Components/Hero/Hero";
@@ -13,14 +14,16 @@ import { Toaster } from "sonner";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import Homepage from "./pages/HomePage/Homepage";
+import userDetailsStore from "./Store/userStoreDetails";
 
 const client = new QueryClient();
 function App() {
+  const user = userDetailsStore((state) => state.user);
   return (
     <QueryClientProvider client={client}>
       <BrowserRouter>
         <Toaster position="top-center" richColors duration={3000} />
-        <Header />
+        {user ? <Head /> : <Header />}
         <Routes>
           <Route path="/home" element={<Homepage />} />
           <Route path="/" element={<Hero />} />

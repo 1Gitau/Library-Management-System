@@ -31,11 +31,12 @@ export default function Login() {
       }
 
       const data = await response.json();
+      console.log(data);
       return data;
     },
 
-    onSuccess: (user) => {
-      setUser(user);
+    onSuccess: (data) => {
+      setUser(data.user);
       toast.success("login successful");
       setTimeout(() => {
         navigate("/home");

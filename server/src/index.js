@@ -1,11 +1,23 @@
 import express, { response } from "express";
 import { PrismaClient } from "@prisma/client";
+import cors from "cors";
 import bcrypt from "bcryptjs";
 const app = express();
+
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  })
+)
+
 const client = new PrismaClient();
 
-app.post("/users", async (req, res) => {
+app.post("/user/signup", async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 8);

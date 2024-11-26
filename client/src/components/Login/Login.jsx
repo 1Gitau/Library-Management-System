@@ -1,12 +1,12 @@
 import React from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
-import apiBase from "../../utils/apiUrl.js";
 import { useMutation } from "react-query";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import userStoreDetails from "../../Store/userStoreDetails.js";
+import apiUrl from "../../utils/apiUrl.js";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function Login() {
 
   const { mutate, isLoading, isError, error } = useMutation({
     mutationFn: async function (userObject) {
-      const response = await fetch(`${apiBase}/login/auth`, {
+      const response = await fetch(`${apiUrl}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export default function Login() {
       setUser(user);
       toast.success("login successful");
       setTimeout(() => {
-        navigate("/blog-listing");
+        navigate("/home");
       }, 2000);
     },
 

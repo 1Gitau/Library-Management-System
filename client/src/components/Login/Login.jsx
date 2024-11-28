@@ -1,17 +1,17 @@
-import React from "react";
-import "./Login.css";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import userStoreDetails from "../../Store/userStoreDetails.js";
 import apiUrl from "../../utils/apiUrl.js";
+import "./Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState(""); // Default to empty string to enforce selection
+  const [roleError, setRoleError] = useState(false); // State to track role selection error
   const setUser = userStoreDetails((state) => state.setUser);
 
   const { mutate, isLoading, isError, error } = useMutation({
@@ -25,21 +25,24 @@ export default function Login() {
         credentials: "include",
       });
 
-      if (response.ok === false) {
-        const error = await response.json();
-        throw new Error(error.message);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
 
-      const data = await response.json();
-      console.log(data);
-      return data;
+      return response.json();
     },
 
     onSuccess: (data) => {
       setUser(data.user);
-      toast.success("login successful");
+      toast.success("Login successful");
+
       setTimeout(() => {
-        navigate("/home");
+        if (data.user.role === "admin") {
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/home");
+        }
       }, 2000);
     },
 
@@ -47,53 +50,71 @@ export default function Login() {
       toast.error(error.message);
     },
   });
-  function handleSubmit(e) {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    mutate({ email, password });
-  }
+    if (!role) {
+      setRoleError(true); // Show error if role is not selected
+      return;
+    }
+    setRoleError(false); // Reset error if role is valid
+    mutate({ email, password, role });
+  };
 
   return (
-    <div>
-      <div className="signup-container">
-        <h2>Welcome back!</h2>
-        <form className="signup-form">
-          <label className="signup-label">Email</label>
+    <div className="login-container">
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Email Input */}
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
           <input
-            type="text"
-            name="Email"
-            className="signup-input"
+            type="email"
+            id="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
-          <label className="signup-label">Password:</label>
+        </div>
 
+        {/* Password Input */}
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            name="password"
-            className="signup-input"
+            id="password"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-          <button
-            type="submit"
-            className="signup-button"
-            disabled={isLoading}
-            onClick={handleSubmit}
+        </div>
+
+        {/* Role Select */}
+        <div className="form-group">
+          <label htmlFor="role">Role:</label>
+          <select
+            name="role"
+            id="role"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            required
           >
-            Login
-          </button>
-          <p className="mt-2 text-center">
-            Already have an account?{" "}
-            <span>
-              <Link to="/signup" className="text-blue-600">
-                signup
-              </Link>
-            </span>
-          </p>
-        </form>
-      </div>
+            <option value="">Select a role</option> {/* Placeholder */}
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+          </select>
+          {roleError && <p className="error-message">Please select a role.</p>}
+        </div>
+
+        {/* Submit Button */}
+        <button type="submit" className="btn-login" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+
+      {isError && <p className="error-message">{error.message}</p>}
     </div>
   );
 }

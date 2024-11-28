@@ -1,49 +1,33 @@
 .hero {
   display: flex;
-  align-items: center;
-  height: 89vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
-    url(../../assets/Images/landing.jpg);
-  background-position: bottom;
-  background-size: cover;
+  background-color: #301934;
+  color: #ffc107;
+  height: 92vh;
+  padding: 30px;
 }
 
-/* @media screen and (max-width: 50em){
-  
-  } */
-
-.hero-slogan {
-  /* justify-content: center; */
-  text-align: center;
-  align-items: center;
-  font-weight: 500;
-  font-size: 4.3rem;
-  color: var(--color-primary);
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: 20px;
+}
+.hero-text {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  word-spacing: 1%;
+}
+.hero-description {
+  font-size: 1.2rem;
+  max-width: 400px;
+  margin-bottom: 20px;
 }
 
-.hero-mission {
-  font-size: 1.5rem;
-  color: var(--color-primary);
-  text-align: center;
-  /* border: 2px solid red; */
-  width: 50%;
-  margin: 0 auto;
-  /* text-align-last: center; */
-}
-
-.hero-container p {
-  margin-top: 2rem;
-  line-height: 1.5;
-  /* letter-spacing: 1.6px; */
-  font-size: 1.9rem;
-}
-
-@media screen and (max-width: 34.375em) {
-  .hero-mission {
-    width: 96%;
-    text-align: justify;
-    padding: 1rem;
-    /* line-height: 0;
-      letter-spacing: 0; */
-  }
+.hero-image {
+  flex: 1;
+  background-size: 90%;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+    url(../../assets/images/hero.jpg);
+  background-repeat: no-repeat;
 }

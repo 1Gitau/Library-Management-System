@@ -1,7 +1,7 @@
-/* General container for login form */
-.login-container {
+/* General container for the book form */
+.student-form-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin: 50px auto;
   padding: 20px;
   background-color: #ffffff;
@@ -11,7 +11,7 @@
 }
 
 /* Form heading */
-.login-container h2 {
+.student-form h2 {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
@@ -23,7 +23,7 @@
   margin-bottom: 15px;
 }
 
-/* Label styles */
+/* Label styling */
 label {
   display: block;
   margin-bottom: 5px;
@@ -32,10 +32,8 @@ label {
   font-size: 0.9rem;
 }
 
-/* Input fields styling */
-input[type="text"],
-input[type="password"],
-select {
+/* Input field styling */
+input[type="text"] {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
@@ -45,15 +43,13 @@ select {
   outline: none;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-select:focus {
+input[type="text"]:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 /* Button styling */
-.btn-login {
+button[type="submit"] {
   width: 100%;
   padding: 10px;
   background-color: #007bff;
@@ -63,36 +59,29 @@ select:focus {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 15px;
   transition: background-color 0.3s ease;
 }
 
-.btn-login:hover {
+button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-/* Link styling */
-.login-container a {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-  font-size: 0.9rem;
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 5px;
 }
 
-.login-container a:hover {
-  text-decoration: underline;
-}
-
-/* Mobile responsiveness */
+/* Responsive design */
 @media (max-width: 480px) {
-  .login-container {
+  .student-form-container {
     padding: 15px;
     font-size: 0.9rem;
   }
 
-  .btn-login {
-    font-size: 0.9rem;
+  .student-form h2 {
+    font-size: 1.5rem;
   }
 }

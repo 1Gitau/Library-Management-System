@@ -1,0 +1,54 @@
+/* General dashboard container */
+.dashboard {
+  display: flex;
+  flex-direction: column; /* Stack items in a column */
+  align-items: center;
+  gap: 20px; /* Space between items */
+  padding: 20px;
+  background-color: #f4f4f4;
+  font-family: "Arial", sans-serif;
+}
+
+/* Individual dashboard box styling */
+.dashboard-box {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 400px; /* Limit width for better readability */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.dashboard-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Headings inside the dashboard box */
+.dashboard-box h2 {
+  color: #007bff;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.dashboard-box h1,
+.dashboard-box h2:last-of-type {
+  color: #333;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .dashboard-box h2 {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-box h1 {
+    font-size: 2rem;
+  }
+}

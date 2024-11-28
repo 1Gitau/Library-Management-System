@@ -3,13 +3,10 @@
   justify-content: space-between;
   padding: 1rem 4rem;
   background-color: var(--color-header);
-  /* border: 2px solid green; */
 }
 .logo-container {
   display: flex;
   align-items: center;
-
-  /* border: 2px solid red; */
 }
 
 .logo-container img {
@@ -17,7 +14,6 @@
 }
 .logo {
   width: 100px;
-  /* height: 100px; */
   color: var(--color-primary);
   font-size: 4rem;
   letter-spacing: 5px;
@@ -38,14 +34,13 @@
   display: flex;
   gap: 3rem;
   justify-content: center;
-  /* border: 2px solid blue; */
+
   margin-top: 1rem;
 }
 
 .navigation-list-items {
   text-align: center;
   letter-spacing: 1px;
-  /* border: 2px solid red; */
 }
 
 .links {

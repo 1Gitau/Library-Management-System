@@ -5,9 +5,9 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import bookRouter from "./Routers/Books.routes.js";
 import studentRouter from "./Routers/Students.routes.js";
-import dashboardCountsRouter from "./Routers/counts.routes.js";
 import cookieParser from "cookie-parser";
-
+import verifyToken from "./middleware/AuthVerifyToken.js";
+import dashboardCountsController from "./Controllers/counts-Controller.js";
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
@@ -22,10 +22,12 @@ app.use(
 
 app.use("", bookRouter);
 app.use("", studentRouter);
-app.use(" ", dashboardCountsRouter);
 
 const client = new PrismaClient();
 
+// counts
+
+app.get("/books/counter", verifyToken, dashboardCountsController);
 // user signup
 app.post("/user/signup", async (req, res) => {
   try {

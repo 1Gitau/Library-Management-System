@@ -40,3 +40,9 @@ model Student{
   Grade String
   password String
 }
+
+model borrowedbooks{
+    id       String @id @default(uuid())
+    bookId String
+    
+}

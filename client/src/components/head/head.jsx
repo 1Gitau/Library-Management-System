@@ -19,31 +19,32 @@ function HeadNav() {
   return (
     <div className="navbar">
       <div className="logo-container">
-        <h2 className="logo">LMS</h2>
+        <h2 className="logo">Book Store</h2>
       </div>
 
       <nav>
         <ol className="navigation-list">
-          <li className="navigation-list-items">
+          {/* <li className="navigation-list-items">
             <Link className="links" to="/">
-              Home
+              Books
             </Link>
-          </li>
-          <li className="navigation-list-items">
-            <Link className="links" to="/store">
-              store
-            </Link>
-          </li>
+          </li> */}
           <li className="navigation-list-items">
             <Link className="links" to="/mybooks">
-              mybooks
+              My Books
             </Link>
           </li>
           <li className="navigation-list-items">
-            <Link className="links" to="/book-categories">
-              Book categories
+            <Link className="links" to="/viewbooks">
+              View Books
             </Link>
           </li>
+
+          {/* <li className="navigation-list-items">
+            <Link className="links" to="/dashboard">
+              Dashboard
+            </Link>
+          </li> */}
           <li className="navigation-list-items">
             <Link className="links" onClick={handleLogout}>
               logout

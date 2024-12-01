@@ -37,12 +37,9 @@ export default function Login() {
       setUser(data.user);
       toast.success("Login successful");
 
+      // Redirect to the books page after login
       setTimeout(() => {
-        if (data.user.role === "admin") {
-          navigate("/admin-dashboard");
-        } else {
-          navigate("/home");
-        }
+        navigate("/books");
       }, 2000);
     },
 
@@ -115,6 +112,11 @@ export default function Login() {
       </form>
 
       {isError && <p className="error-message">{error.message}</p>}
+
+      {/* Sign Up Link */}
+      <p className="signup-link">
+        Do not have an account? <Link to="/signup">Sign up here</Link>.
+      </p>
     </div>
   );
 }

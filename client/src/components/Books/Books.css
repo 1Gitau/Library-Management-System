@@ -1,0 +1,125 @@
+/* Container for the book cards */
+.book-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Increased spacing between cards */
+  justify-content: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+/* Individual book card styling */
+.book-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px; /* Larger width for cards */
+  padding: 10px;
+  text-align: center;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Book image wrapper */
+.book-image {
+  width: 100%;
+  height: 150px; /* Increased height */
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.book-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image scales properly */
+  border-radius: 5px;
+}
+
+/* Book title styling */
+.book-title {
+  font-size: 1rem; /* Larger font size */
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* Button group for actions */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px; /* Increased button spacing */
+}
+
+/* Edit button styling */
+.btn-edit {
+  flex: 1;
+  padding: 8px;
+  font-size: 0.9rem; /* Larger button text */
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3;
+}
+
+/* Delete button styling */
+.btn-delete {
+  flex: 1;
+  padding: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .book-card {
+    width: 180px; /* Slightly smaller cards on medium screens */
+  }
+
+  .book-title {
+    font-size: 0.95rem;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-card {
+    width: 160px; /* Smaller cards on small screens */
+  }
+
+  .book-title {
+    font-size: 0.9rem;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    font-size: 0.8rem;
+  }
+}

@@ -23,3 +23,13 @@ const userDetailsStore = create(
 );
 
 export default userDetailsStore;
+
+// import create from "zustand";
+
+// const userDetailsStore = create((set) => ({
+//   user: null,
+//   setUser: (userData) => set({ user: userData }),
+//   logout: () => set({ user: null }),
+// }));
+
+// export default userDetailsStore;

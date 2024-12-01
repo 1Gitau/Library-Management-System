@@ -19,10 +19,10 @@ const Dashboard = () => {
         <h2>Total Students</h2> <br />
         <h2></h2>
       </div>
-      <div className="dashboard-box">
+      {/* <div className="dashboard-box">
         <h2>Total Admin</h2> <br />
         <h2></h2>
-      </div>
+      </div> */}
     </div>
   );
 };

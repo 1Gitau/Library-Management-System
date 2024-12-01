@@ -45,7 +45,7 @@ function HeaderNav() {
     <div className="navbar">
       <h2 className="logo">
         <Link to="/" className="logo-link">
-          BOOK SHOP
+          BOOK STORE
         </Link>
       </h2>
       <nav>
@@ -69,6 +69,11 @@ function HeaderNav() {
           <li className="navigation-list-items">
             <Link className="links" to="/dashboard">
               Dashboard
+            </Link>
+          </li>
+          <li className="navigation-list-items">
+            <Link className="links" to="/signup">
+              Signup
             </Link>
           </li>
           <li className="navigation-list-items">

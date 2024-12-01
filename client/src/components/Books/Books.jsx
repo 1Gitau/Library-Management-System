@@ -1,81 +1,132 @@
-// import React from 'react'
-// import './Books.css'
+// import React, { useEffect, useState } from 'react';
+// import './Books.css';
+// import apiUrl from '../../utils/apiUrl';
+
 // function Books() {
+//   const [books, setBooks] = useState([]); // Store books fetched from the API
+//   const [loading, setLoading] = useState(true); // Loading state
+//   const [error, setError] = useState(null); // Error state
+//   const [borrowedBooks, setBorrowedBooks] = useState(new Set()); // Track borrowed books
+
+//   useEffect(() => {
+//     const fetchBooks = async () => {
+//       try {
+//         const response = await fetch(`${apiUrl}/user/getbooks`, {
+//           credentials: 'include', // Send cookies with the request (if needed)
+//         });
+
+//         if (!response.ok) {
+//           throw new Error('Failed to fetch books');
+//         }
+
+//         const data = await response.json();
+//         setBooks(data); // Store the fetched books
+//       } catch (err) {
+//         setError(err.message); // Set error message if API request fails
+//       } finally {
+//         setLoading(false); // Set loading to false after the request is done
+//       }
+//     };
+
+//     fetchBooks(); // Fetch books when component mounts
+//   }, []);
+
+//   // Borrow a book by sending a POST request to the backend
+//   const borrowBook = async (bookId) => {
+//     try {
+//       const response = await fetch(`${apiUrl}/user/borrowBook`, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         credentials: 'include', // Send cookies with the request (if needed)
+//         body: JSON.stringify({ bookId }), // Send the bookId to mark as borrowed
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Failed to borrow book');
+//       }
+
+//       // Mark the book as borrowed by adding it to the `borrowedBooks` set
+//       setBorrowedBooks((prev) => new Set(prev).add(bookId));
+//     } catch (err) {
+//       setError(err.message); // Handle error if borrowing fails
+//     }
+//   };
+
+//   if (loading) return <div>Loading books...</div>;
+//   if (error) return <div>Error: {error}</div>;
+
 //   return (
 //     <div>
-//       Books
-
+//       <h1>All Books Created by Students</h1>
+//       <div className="books-container">
+//         {books.map((book) => (
+//           <div key={book.id} className="book-card">
+//             <img src={book.bookImage} alt={book.title} className="book-image" />
+//             <h2 className="book-title">{book.title}</h2>
+//             <button
+//               className="borrow-button"
+//               onClick={() => borrowBook(book.id)} // Borrow the book on button click
+//               disabled={borrowedBooks.has(book.id)} // Disable the button if book is borrowed
+//             >
+//               {borrowedBooks.has(book.id) ? 'Borrowed' : 'Borrow'} {/* Change button text */}
+//             </button>
+//           </div>
+//         ))}
+//       </div>
 //     </div>
-//   )
+//   );
 // }
 
-// export default Books
+// export default Books;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Books.css";
+import apiUrl from "../../utils/apiUrl";
 
 function Books() {
-  const [books, setBooks] = useState([
-    {
-      id: 1,
-      title: "The Great Gatsby",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      title: "1984",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      title: "1984",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      title: "1984",
-      imageUrl: "https://via.placeholder.com/150",
-    },
-  ]);
+  const [books, setBooks] = useState([]); // Store books fetched from the API
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
-  const handleEdit = (id) => {
-    const newTitle = prompt("Enter new title:");
-    if (newTitle) {
-      setBooks(
-        books.map((book) =>
-          book.id === id ? { ...book, title: newTitle } : book,
-        ),
-      );
-    }
-  };
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/user/getbooks`, {
+          credentials: "include", // Send cookies with the request (if needed)
+        });
 
-  const handleDelete = (id) => {
-    setBooks(books.filter((book) => book.id !== id));
-  };
+        if (!response.ok) {
+          throw new Error("Failed to fetch books");
+        }
+
+        const data = await response.json();
+        setBooks(data); // Store the fetched books
+      } catch (err) {
+        setError(err.message); // Set error message if API request fails
+      } finally {
+        setLoading(false); // Set loading to false after the request is done
+      }
+    };
+
+    fetchBooks(); // Fetch books when component mounts
+  }, []);
+
+  if (loading) return <div>Loading books...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="book-container">
-      {books.map((book) => (
-        <div className="book-card" key={book.id}>
-          <div className="book-image">
-            <img src={book.imageUrl} alt={book.title} className="book-image" />
+    <div>
+      <h1>All Books Created by Students</h1>
+      <div className="books-container">
+        {books.map((book) => (
+          <div key={book.id} className="book-card">
+            <img src={book.bookImage} alt={book.title} className="book-image" />
+            <h2 className="book-title">{book.title}</h2>
           </div>
-          <div className="book-title">
-            <h3 className="book-title">{book.title}</h3>
-          </div>
-          <div className="button-group">
-            <button onClick={() => handleEdit(book.id)} className="btn-edit">
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(book.id)}
-              className="btn-delete"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

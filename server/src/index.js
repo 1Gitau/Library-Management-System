@@ -3,8 +3,13 @@ import { PrismaClient } from "@prisma/client";
 import cors from "cors";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-const app = express();
+import bookRouter from "./Routers/Books.routes.js";
+import studentRouter from "./Routers/Students.routes.js";
+import dashboardCountsRouter from "./Routers/counts.routes.js";
+import cookieParser from "cookie-parser";
 
+const app = express();
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -15,12 +20,16 @@ app.use(
   }),
 );
 
+app.use("", bookRouter);
+app.use("", studentRouter);
+app.use(" ", dashboardCountsRouter);
+
 const client = new PrismaClient();
 
 // user signup
 app.post("/user/signup", async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 8);
 
     const user = await client.user.create({

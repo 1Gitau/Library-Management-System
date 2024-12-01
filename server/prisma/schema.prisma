@@ -16,8 +16,27 @@ model User{
 id String @default(uuid()) @id
 firstName String
 lastName String
+role String @default("Student")
 email String @unique
 password String 
+book Book[]
 
 @@map("users")
+}
+
+model Book {
+  id       String @id @default(uuid())
+  title    String
+  bookImage String
+  owner    String
+  user     User   @relation(fields: [owner], references: [id])
+
+  @@map("books")
+}
+
+model Student{
+  id       String @id @default(uuid())
+  rollNo String @unique
+  Grade String
+  password String
 }
